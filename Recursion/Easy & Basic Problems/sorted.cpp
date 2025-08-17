@@ -1,31 +1,43 @@
 #include<iostream>
 using namespace std;
 
-bool sorted(int arr[] , int size, int index ){
-    // base case 
-    if(index == size){
-        return true ;
-    }
+bool isSorted(int arr[], int size, int index){
+    // base case
+    if(index == size -1)
+    return true;
 
-    // one case ham solve krege 
-    if (arr[index -1] > arr[index]){
-        return false;
-    }
-   
-    // baaki recursion karega
-    return sorted(arr,size,index +1);
+    // processing part
+    if(arr[index] > arr[index+1])
+    return false;
     
+    bool remianingPart = isSorted(arr, size, index + 1);
+    return remianingPart;
+
 }
 
-
-
 int main(){
-    
-    int arr [] = {10,20,30,40};
-    int size = 4;
-    int index = 1 ;
-    
-    cout << "Array is sorted or not : "<< sorted(arr,size,index);
- 
+   int size;
+    cout << "Enter the size of an array: " ;
+    cin >> size;
+    int arr[size];
+
+    int index = 0;
+    cout << "Enter the elemnts in an array: ";
+
+    for(int i = 0; i<size; i++){
+        cin >> arr[i];
+    }
+
+    bool ans = isSorted(arr, size, index);
+    if(ans){
+        cout << "Array is sorted" << endl;
+    }
+    else {
+        cout << "Array is not sorted" << endl;
+    }
+
     return 0;
+
+    
+ 
 }
