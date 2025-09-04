@@ -14,7 +14,7 @@ void printSubsequence(string str, int index, string output, vector<string> &ans)
     // 1 case khud solve krege
     char ch = str[index]; 
     // include ch
-     printSubsequence(str, index + 1, output+ch, ans);
+     printSubsequence(str, index + 1, output+ ch, ans);
    
     // exclude ch 
      printSubsequence(str, index + 1, output, ans);
