@@ -2,52 +2,37 @@
 #include<vector>
 using namespace std;
 
-void solve(int nums[], int size, vector<int>& output, int index, vector<vector<int>>& ans) {
-    // base case
-    if(index >= size){
-        ans.push_back(output);
-        return;
+void printSubsets(int arr[], int size, int index, vector<int>& ans){
+    // base case 
+       if(index == size){
+        for(auto it : ans){
+            cout << it << " ";
+        }
+        cout << endl;
+        return ;
     }
 
-    // exclude
-    solve(nums, size, output, index + 1, ans);
+    // exclude case
+    printSubsets(arr, size, index + 1, ans);
 
-    // include
-    int element = nums[index];
-    output.push_back(element);
-    solve(nums, size, output, index + 1, ans);
-
-    // backtrack (important to remove last pushed element)
-    output.pop_back();
+    // include case 
+    ans.push_back(arr[index]);
+    printSubsets(arr, size, index + 1, ans);
+    ans.pop_back();
+    
 }
 
 int main(){
-    vector<int> output; 
-    vector<vector<int>> ans;
-
-    int size;
+    int size ;
     cout << "Enter the size of an array: ";
     cin >> size;
-    int nums[size];
+    int arr[size];
 
     cout << "Enter the elements in an array: ";
-    for(int i = 0; i < size; i++){
-        cin >> nums[i];
+    for(int i =0; i<size; i++){
+        cin >> arr[i];
     }
-
-    int index = 0; // initialize properly
-    solve(nums, size, output, index, ans);
-
-    // Print subsets
-    cout << "All subsets are:\n";
-    for(auto subset : ans){
-        cout << "[";
-        for(int i = 0; i < subset.size(); i++){
-            cout << subset[i];
-            if(i < subset.size() - 1) cout << ", ";
-        }
-        cout << "]\n";
-    }
-
+    vector<int> ans;
+    printSubsets(arr,size,0,ans);
     return 0;
 }
